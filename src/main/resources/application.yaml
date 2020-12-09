@@ -1,0 +1,40 @@
+#
+#server.port=8080
+#
+#spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+#spring.datasource.username=postgres
+#spring.datasource.password=xdwxdw123
+#
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#spring.jpa.database=postgresql
+#spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL10Dialect
+
+server:
+    port: 8080
+
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/postgres?currentSchema=online_shop
+        username: postgres
+        password: xdwxdw123
+        driver-class-name: org.postgresql.Driver
+        initialization-mode: ALWAYS
+        schema: classpath*:database/initDB.sql
+    jpa:
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+        hibernate:
+            ddl-auto: update
+#        open-in-view: false
+#        show-sql: true
+
+
+logging:
+    file:
+        name: logfile.log
+
+
+ProjectProperties:
+    expiresIn: 3600
+    validityMiliSeconds: 3600000
+    secretKey: success
