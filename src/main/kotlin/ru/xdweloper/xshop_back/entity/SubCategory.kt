@@ -9,10 +9,11 @@ import javax.persistence.*
  */
 
 @Entity
+@Table(name = "sub_category", schema = "online_shop")
 data class SubCategory (
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long,
-        val categoryId: Long,
+        private val categoryId: Long,
         val name: String? =""
     )

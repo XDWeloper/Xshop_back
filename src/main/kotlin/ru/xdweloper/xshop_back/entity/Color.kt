@@ -13,7 +13,7 @@ import javax.persistence.Id
 @Entity
 data class Color(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         val color_name: String? = "",
         val color_number: String? = null

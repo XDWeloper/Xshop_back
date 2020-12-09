@@ -14,7 +14,7 @@ import javax.persistence.Id
 @Entity
 data class Size (
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         val size_name: String
 )

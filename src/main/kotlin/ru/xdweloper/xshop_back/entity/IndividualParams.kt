@@ -14,7 +14,7 @@ import javax.persistence.Id
 @Entity
 data class IndividualParams(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         val orderId: Long,
         val height: Int? = null,

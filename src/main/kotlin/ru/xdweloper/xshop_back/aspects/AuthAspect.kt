@@ -20,7 +20,7 @@ class AuthAspect(
         private val authService: AuthService
 ) {
 
-    @Around( "Pointcut.create() || Pointcut.update() || Pointcut.delete()")
+  //  @Around( "Pointcut.create() || Pointcut.update() || Pointcut.delete()")
     fun aroundCallAt(processPoint: ProceedingJoinPoint): Any? {
         return processPoint.args
                 .find {it is HttpServletRequest }

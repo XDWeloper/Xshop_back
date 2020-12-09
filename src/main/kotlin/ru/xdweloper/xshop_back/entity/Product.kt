@@ -12,7 +12,7 @@ import javax.persistence.*
 @Entity
 data class Product(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         val subcategoryid: Long,
         val title: String? = "",
@@ -22,10 +22,30 @@ data class Product(
         val date: Date,
         val articul: String? = null,
 
-        @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-        val colors: List<Product_colors>?,
+        @ManyToMany(cascade = [CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH], fetch = FetchType.LAZY)
+        @JoinTable(name = "product_colors",
+                joinColumns = [JoinColumn(name = "product_id")],
+                inverseJoinColumns = [JoinColumn(name = "color_id")])
+        val colors: List<Color>?,
 
-        @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-        val sizes: List<Product_sizes>?
+        @ManyToMany(cascade = [CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH], fetch = FetchType.LAZY)
+        @JoinTable(name = "product_sizes",
+                joinColumns = [JoinColumn(name = "product_id")],
+                inverseJoinColumns = [JoinColumn(name = "size_id")])
+
+        val sizes: List<Size>?
+
+        /**
+         * Можно сделать так для этого нужно вернуть из cart  таблицы Product_colors и Product_sizes
+         * тоже работает нормально но промежуточные таблицы тогда тоже нужно затягивать
+         * текущий вариант более правильный.
+         *
+         * @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+         * val colors: List<Product_colors>?,
+         *
+         * @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+         * val sizes: List<Product_sizes>?
+*/
+
 
 )
