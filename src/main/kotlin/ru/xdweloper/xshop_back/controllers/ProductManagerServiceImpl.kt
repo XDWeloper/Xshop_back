@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping(value = [BASE_URL, PRODUCT_URL])
 @CrossOrigin
 class ProductManagerServiceImpl(
-        private val productDao: ProductDao
+        private val  productDao: ProductDao
 ) : ProductManagerService {
 
     @TrackExecutionTime
@@ -31,26 +31,31 @@ class ProductManagerServiceImpl(
 
     @TrackExecutionTime
     @GetMapping(value = ["$FIND_URL"])
-    override fun findById(@PathVariable id: Long): Product? = productDao.findByIdOrNull(id)
-
+    override fun findById(@PathVariable id: Long?): Product? = id?.let { productDao.findByIdOrNull(it) }
 
     @TrackExecutionTime
     @PostMapping(value = ["$CREATE_URL"])
-    override fun create(@RequestBody product: Product, request: HttpServletRequest): Product = productDao.save(product)
-
+    override fun create(@RequestBody product: Product?, request: HttpServletRequest): Product? = product?.let { productDao.save(product) }
 
     @TrackExecutionTime
-    @PutMapping(value = ["$UPDATE_URL"])
-    override fun update(@RequestBody product: Product, request: HttpServletRequest): Product = productDao.save(product)
-
+    @PatchMapping(value = ["$UPDATE_URL"])
+    override fun update(@RequestBody product: Product?, request: HttpServletRequest): Product? = product?.let { productDao.save(product) }
 
     @TrackExecutionTime
     @DeleteMapping(value = ["$DELETE_URL"])
-    override fun delete(@PathVariable id: Long, request: HttpServletRequest) = productDao.deleteById(id)
+    override fun delete(@PathVariable id: Long?, request: HttpServletRequest): Unit? = id?.let { productDao.deleteById(it) }
+
+    /**test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_*/
+    @GetMapping(value = ["test"])
+    fun test(): String{
+      return "productDao.findAll()";
+    }
+    /**test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_test_*/
+
 
     @TrackExecutionTime
     @GetMapping("/pageable")
-    fun findAllByPageable(pageable: Pageable): Page<Product>{
+    fun findAllByPageable(pageable: Pageable): Page<Product> {
         return productDao.findAll(pageable)
     }
 }

@@ -1,6 +1,7 @@
 package ru.xdweloper.xshop_back.dao
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.stereotype.Repository
 import ru.xdweloper.xshop_back.entity.Product
 

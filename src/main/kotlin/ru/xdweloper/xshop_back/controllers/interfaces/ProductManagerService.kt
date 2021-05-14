@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest
 interface ProductManagerService {
 
     fun findByAll(): List<Product>
-    fun findById(id: Long): Product?
-    fun create(product: Product, request: HttpServletRequest): Product
-    fun update(product: Product, request: HttpServletRequest): Product
-    fun delete(id: Long, request: HttpServletRequest)
+    fun findById(id: Long?): Product?
+    fun create(product: Product?, request: HttpServletRequest): Product?
+    fun update(product: Product?, request: HttpServletRequest): Product?
+    fun delete(id: Long?, request: HttpServletRequest): Unit?
 }
